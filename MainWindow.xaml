@@ -1,0 +1,38 @@
+﻿<Window x:Class="AD_High_GUI_.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AD_High_GUI_"
+        mc:Ignorable="d"
+        Title="BMP 파일 변환 프로그램" Height="500" Width="500">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="파일(_F)">
+                <MenuItem x:Name="info" Header="파일 정보(_I)" Click="OnMenuItemInfoClick"
+                          IsEnabled="False"/>
+                <Separator/>
+                <MenuItem x:Name="open" Header="열기(_O)..." Click="OnMenuItemOpenClick"/>
+                <MenuItem x:Name="save_as" Header="다른 이름으로 저장(_S)..." 
+                          Click="OnMenuItemSaveClick" IsEnabled="False"/>
+                <Separator/>
+                <MenuItem Header="나가기(_X)" Click="OnMenuItemExitClick"/>
+            </MenuItem>
+            <MenuItem Header="수정(_E)">
+                <MenuItem x:Name="draw" Header="사각형 그리기(_D)" Click="OnMenuItemDrawClick"
+                          IsEnabled="False"/>
+                <Separator/>
+                <MenuItem x:Name="reverse" Header="밝기 반전(_E)" Click="OnMenuItemReverseClick"
+                          IsEnabled="False"/>
+            </MenuItem>
+        </Menu>
+        <UniformGrid Background="#464646">
+            <Canvas Name="canvas"
+                MouseDown="OnCanvasMouseDown" MouseMove="OnCanvasMouseMove" 
+                    MouseUp="OnCanvasMouseUp" Margin="50">
+                <Image Name="imgDisplay" Stretch="Uniform"/>
+                <Rectangle Name="dragRectangle" Stroke="Red" StrokeThickness="1" Visibility="Hidden" />
+            </Canvas>
+        </UniformGrid>
+    </DockPanel>
+</Window>
