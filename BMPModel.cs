@@ -47,8 +47,9 @@ public class BMPModel
     private List<ColorPalette> _colorTable = new List<ColorPalette>();
 
     private byte[] _decodedData = new byte[0];
-    private List<byte> _encodedData = new List<byte>();
     private byte[] _pixelData = new byte[0];
+    private List<byte> _encodedData = new List<byte>();
+    
 
     public BMPHeader BMP { get => _bmpHeader; }
     public string GetBMPFileName { get => BMPFileName; }
@@ -287,7 +288,6 @@ public class BMPModel
                         currentPos += remaining;
                     }
                 }
-
 
                 else if (count == 1)
                 {

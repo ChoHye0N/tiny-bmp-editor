@@ -13,8 +13,6 @@ public class BMPViewModel : INotifyPropertyChanged
     public BMPViewModel()
     {
         _bmpResource = BMP.GetBMPFileName;
-
-        OnPropertyChanged(nameof(BMPResource));
     }
 
     public BMPHeader BMPHeaderInfo()
@@ -32,46 +30,31 @@ public class BMPViewModel : INotifyPropertyChanged
         BMP.DrawRectangle(correctedStartX, correctedStartY, correctedEndX, correctedEndY);
     }
 
-    private void InitializeBMP()
-    {
-        BMP = null;
-        BMP = new BMPModel();
-    }
-
     public void InvertBrightness()
     {
         BMP.InvertBrightness();
     }
 
-    public bool ReadBMP(string fileName)
+    public void ReadBMP(string fileName)
     {
-        InitializeBMP();
+        BMP = new BMPModel();
 
-        bool isSuccess = BMP.ReadBMP(fileName);
-
-        if (!isSuccess)
+        if (!BMP.ReadBMP(fileName))
         {
             BMP.ReadBMP(_bmpResource);
             throw new Exception("BMP 파일을 읽는 중에 오류가 발생했습니다.");
         }
 
         _bmpResource = BMP.GetBMPFileName;
-
         OnPropertyChanged(nameof(BMPResource));
-
-        return isSuccess;
     }
 
-    public bool WriteBMP(string fileName)
+    public void WriteBMP(string fileName)
     {
-        bool isSuccess = BMP.WriteBMP(fileName);
-
-        if (!isSuccess)
+        if (!BMP.WriteBMP(fileName))
         {
             throw new Exception("BMP 파일을 쓰는 중에 오류가 발생했습니다.");
         }
-
-        return isSuccess;
     }
 
     public WriteableBitmap UpdateBMPImage()
@@ -86,7 +69,7 @@ public class BMPViewModel : INotifyPropertyChanged
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    protected void OnPropertyChanged(string propName = "")
+    protected void OnPropertyChanged(string propName)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
     }
