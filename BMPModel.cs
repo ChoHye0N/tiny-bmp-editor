@@ -480,7 +480,7 @@ public class BMPModel
 
                 double compressionRate = (double)_encodedData.ToArray().Length / 
                     _pixelData.Length * 100;
-                MessageBox.Show($"원본 파일의 {compressionRate:F2}%의 압축률을 보임", "압축률");
+                MessageBox.Show($"압축률 : {compressionRate:F2}%", "해당 파일 압축률");
 
                 return true;
             }
